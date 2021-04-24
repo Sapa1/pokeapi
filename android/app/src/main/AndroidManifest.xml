@@ -1,5 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.poke_api">
+
+<!-- Required to fetch data from the internet. -->
+<uses-permission android:name="android.permission.INTERNET" />
+
+
    <application
         android:label="poke_api"
         android:icon="@mipmap/ic_launcher">
