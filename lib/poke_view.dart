@@ -32,11 +32,18 @@ class _PokeViewState extends State<PokeView> {
                         width: 400,
                         fit: BoxFit.cover,
                       ),
-                      ListView.builder(
-                          itemCount: snapshot.data.abilities.length,
-                          itemBuilder: (context, index) {
-                            return Text(snapshot.data.abilities[index].name);
-                          }),
+                      Container(
+                        height: 90,
+                        width: 200,
+                        child: ListView.builder(
+                            itemCount: snapshot.data.abilities.length,
+                            itemBuilder: (context, index) {
+                              return Text(
+                                snapshot.data.abilities[index].name,
+                                style: TextStyle(fontSize: 25),
+                              );
+                            }),
+                      ),
                       Text(
                         snapshot.data.nome,
                         style: TextStyle(
