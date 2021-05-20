@@ -9,7 +9,12 @@ class PokeView extends StatefulWidget {
 }
 
 class _PokeViewState extends State<PokeView> {
-  final controller = PokeController();
+  final viewModel = HomeViewModel();
+  @override
+  void initState() {
+    super.initState();
+    viewModel.loadPokemon();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +22,10 @@ class _PokeViewState extends State<PokeView> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FutureBuilder<Pokemon>(
-              future: controller.pokemon,
+          StreamBuilder<Pokemon>(
+              stream: viewModel.streamPokemon.stream,
               builder: (context, snapshot) {
-                if (snapshot.connectionState != ConnectionState.done) {
+                if (snapshot.connectionState != ConnectionState.active) {
                   return CircularProgressIndicator();
                 }
                 if (snapshot.hasData) {
@@ -59,7 +64,7 @@ class _PokeViewState extends State<PokeView> {
           ElevatedButton(
               onPressed: () {
                 setState(() {
-                  controller.loadPokemon();
+                  viewModel.loadPokemon();
                 });
               },
               child: Text('Load Pokemon'))
